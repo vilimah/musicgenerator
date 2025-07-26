@@ -1,5 +1,5 @@
 class Solmu:
-    """ Trie tietorakenne
+    """ Trien solmu
     """
     def __init__(self):
         self.lapset = {}
@@ -7,10 +7,14 @@ class Solmu:
         self.arvo = None # lisäarvo
 
 class MelodiaTrie:
+    """ Trie tietorakenne
+    """
     def __init__(self):
         self.juuri = Solmu() # juurisolmu
 
     def insertti(self, avain, arvo=None):
+        """ insert funktio
+        """
         solmu = self.juuri
         for symboli in avain: # käy läpi syötteen
             if symboli not in solmu.lapset: # tässä luodaan uusi solmu jos symbolia ei ole
