@@ -1,4 +1,5 @@
-from mido import MidiFile
+import os
+from mido import MidiFile, MidiTrack, Message, MetaMessage, bpm2tempo
 
 def nuotit_midista(tiedosto):
     """ Pohja tiedoston lukua varten
@@ -32,3 +33,38 @@ def nuotit_midista(tiedosto):
         viimeinen_aloitus = aloitus
     return tulos
 
+
+def exporttaa_midi(melodia, tiedosto, bpm):
+    """ exporttaa melodian midinä """
+
+    # os.makedirs(os.path.dirname(tiedosto), exist_ok=True) # tämä luo kansion jos ei vielä ole
+
+    midi = MidiFile()
+    raita = MidiTrack()
+    midi.tracks.append(raita)
+
+    tempo = bpm2tempo(bpm)
+    raita.append(MetaMessage("set_tempo", tempo=tempo, time=0))
+
+
+
+    ticks_per_beat = midi.ticks_per_beat
+
+    for pitch, kesto, delta in melodia:
+        delta_ticks = int(delta * ticks_per_beat)
+        kesto_ticks = int(kesto * ticks_per_beat)
+
+        raita.append(Message("note_on", note=pitch, velocity=100, time=delta_ticks))
+        raita.append(Message("note_off", note=pitch, velocity=100, time=kesto_ticks))
+
+    midi.save(tiedosto)
+
+def generoi_tiedostonimi(kansio, nimi="melodia", paate=".mid"):
+    """ Tämä lisää melodian nimeen aina uuden numeron, ettei se overwritee tiedostoja generoidessa"""
+    i = 1
+    while True:
+        koko_nimi = f"{nimi}_{i}{paate}"
+        polku = os.path.join(kansio, koko_nimi)
+        if not os.path.exists(polku):
+            return polku
+        i += 1

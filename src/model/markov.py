@@ -4,7 +4,7 @@ from collections import defaultdict
 class MarkovGen:
     """ Markovin ketjujen generointi-luokka
     """
-    def __init__(self, aste=2): # aste tulee vielä pystyä vaihtamaan inputilla
+    def __init__(self, aste): # aste tulee vielä pystyä vaihtamaan inputilla
         self.aste = aste
         self.malli = defaultdict(list)
 
@@ -16,7 +16,7 @@ class MarkovGen:
             seuraava = sekvenssi[i + self.aste] # seuraava nuotti
             self.malli[avain].append(seuraava) # tallentaa seuraavan mahdollisen nuotin
             
-    def generointi(self, pituus=50): # pituus tulee vielä pystyä vaihtamaan inputilla
+    def generointi(self, pituus): # pituus tulee vielä pystyä vaihtamaan inputilla
         """ Generointi-funktio
         """
         if not self.malli: # varmistaa, että jos mallia ei ole koulutettu niin palauttaa tyhjän listan

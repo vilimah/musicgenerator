@@ -21,3 +21,4 @@ ChatGPT:tä käytetty alussa suunnitteluun, että pääseen alkuun. Kysyin, mite
 ## Lähteet
 - Trie wikipedia-artikkeli: https://en.wikipedia.org/wiki/Trie?utm_source=chatgpt.com
 - Markov chain wikipedia-artikkeli: https://en.wikipedia.org/wiki/Markov_chain
+- Pygame midi -kirjasto: https://www.pygame.org/docs/ref/midi.html
