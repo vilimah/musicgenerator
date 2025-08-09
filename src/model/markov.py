@@ -1,36 +1,33 @@
 import random
-from collections import defaultdict
+from model.trie import Trie
 
-class MarkovGen:
-    """ Markovin ketjujen generointi-luokka
-    """
-    def __init__(self, aste): # aste tulee vielä pystyä vaihtamaan inputilla
-        self.aste = aste
-        self.malli = defaultdict(list)
+    
+def rakenna_trie(opetusdata, aste=3):
+    """ Trien rakennus """
+    trie = Trie()
+    for i in range(len(opetusdata)-aste + 1):
+        jakso = opetusdata[i:i+aste]
+        trie.insertti(jakso)
+    return trie
 
-    def opetus(self, sekvenssi):
-        """ Opetus-funktio
-        """
-        for i in range(len(sekvenssi) - self.aste):
-            avain = tuple(sekvenssi[i:i + self.aste]) # lähtien nykyisestä kohdasta, ottaa osajonon
-            seuraava = sekvenssi[i + self.aste] # seuraava nuotti
-            self.malli[avain].append(seuraava) # tallentaa seuraavan mahdollisen nuotin
-            
-    def generointi(self, pituus): # pituus tulee vielä pystyä vaihtamaan inputilla
-        """ Generointi-funktio
-        """
-        if not self.malli: # varmistaa, että jos mallia ei ole koulutettu niin palauttaa tyhjän listan
-            return []
-        
-        avain = random.choice(list(self.malli.keys())) # satunnainen aloitusnuotti
-        output = list(avain) # aloittaa aloitusnuotista
+def generoi_triella(trie, pituus, aloitus=None, aste=3):
+    """ generoi triella """
+    if aloitus is None:
+        aloitus = random.choices(list(trie.juuri.lapset.keys()), k=aste)
 
-        for _ in range(pituus - self.aste):
-            edellinen = tuple(output[-self.aste:]) # katsoo edelliset nuotit eli x astetta 
-            seuraavat_nuotit = self.malli.get(edellinen, [])
-            if not seuraavat_nuotit: # jos ei löydy niin generointi loppuu
-                break 
-            output.append(random.choice(seuraavat_nuotit))
+    melodia = list(aloitus)
+    for _ in range(pituus - len(aloitus)):
+        konteksti = tuple(melodia[-aste:])
+        seuraavat = trie.getter(konteksti)
+        if not seuraavat:
+            break
+        seuraava = painotettu_valinta(seuraavat)
+        melodia.append(seuraava)
+    return melodia
 
-        return output
-
+def painotettu_valinta(vaihtoehdot):
+    """ palauttaa yhden vaihtoehdon painotetulla arvonnalla """
+    kaikki = []
+    for jakso, maara in vaihtoehdot.items():
+        kaikki.extend([jakso] * maara)
+    return random.choice(kaikki)

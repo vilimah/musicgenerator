@@ -1,24 +1,33 @@
-class Solmu:
-    """ Trien solmu
-    """
-    def __init__(self):
-        self.lapset = {}
-        self.paate = False # onko päätepiste vai ei
-        self.arvo = None # lisäarvo
+class TrieSolmu:
+    """ Trien solmu """
 
-class MelodiaTrie:
-    """ Trie tietorakenne
-    """
     def __init__(self):
-        self.juuri = Solmu() # juurisolmu
+        self.lapset = {} 
+        self.laskuri = 0
 
-    def insertti(self, avain, arvo=None):
-        """ insert funktio
+
+class Trie:
+    """ Trie sekvensseille """
+
+    def __init__(self):
+        self.juuri = TrieSolmu()
+
+    def insertti(self, sekvenssi):
+        """ insertti
+        
         """
         solmu = self.juuri
-        for symboli in avain: # käy läpi syötteen
-            if symboli not in solmu.lapset: # tässä luodaan uusi solmu jos symbolia ei ole
-                solmu.lapset[symboli] = Solmu()
-            solmu = solmu.lapset[symboli]
-        solmu.arvo = arvo
-        solmu.paate = True
+        for nuotti in sekvenssi:
+            if nuotti not in solmu.lapset:
+                solmu.lapset[nuotti] = TrieSolmu()
+            solmu = solmu.lapset[nuotti]
+            solmu.laskuri += 1
+
+    def getter(self, konteksti):
+        solmu = self.juuri
+        for nuotti in konteksti:
+            if nuotti in solmu.lapset:
+                solmu = solmu.lapset[nuotti]
+            else:
+                return {}
+        return {nuotti: lapsi.laskuri for nuotti, lapsi in solmu.lapset.items()}
