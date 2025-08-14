@@ -92,5 +92,5 @@ class MusicGeneratorApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = MusicGeneratorApp(root)
+    app = MusicGeneratorApp(root)l
     root.mainloop()
