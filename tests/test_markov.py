@@ -1,41 +1,63 @@
 import unittest
-from src.model.markov import rakenna_trie, generoi_triella, painotettu_valinta
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+from collections import Counter
+from src.model import markov
 
-class TestiMarkovGen(unittest.TestCase):
-    def setUp(self):
-        self.opetusdata = ["60", "62", "64", "65", "64", "69", "71", "67", "69", "71", "72", "74", "60", "62", "64", "65", "64", "69", "71", "67", "69", "71", "72", "74"]
-        self.aste = 3
-        self.trie = rakenna_trie(self.opetusdata, aste=self.aste)
-        print("\n[setUp] Trie rakennettu syötteellä:", self.opetusdata)
-        print("[setUp] Aste:", self.aste)
+class MockTrie:
+    """ Data trie:tä varten testaukseen """
+    def __init__(self, aste):
+        self.aste = aste
+        self.data = {
+            ("A", "B"): Counter({"C": 5, "D": 3}),
+            ("B", "C"): Counter({"A": 2, "D": 4})
+        }
 
-    def test_rakenna_trie(self):
-        print("[test_rakenna_trie] Trie juuren lapset:", list(self.trie.juuri.lapset.keys()))
-        self.assertIsNotNone(self.trie.juuri.lapset)
-        self.assertGreater(len(self.trie.juuri.lapset), 0)
+    def next_distribution(self, ikkuna):
+        """ Mock next_distribution metodi """
+        return self.data.get(tuple(ikkuna), None)
 
-    def test_painotettu_valinta(self):
-        vaihtoehdot = {"60": 2, "62": 1}
-        print("[test_painotettu_valinta] Vaihtoehdot:", vaihtoehdot)
-        valinnat = [painotettu_valinta(vaihtoehdot) for _ in range(100)]
-        print("[test_painotettu_valinta] Valinnat (20 kpl):", valinnat)
-        self.assertIn("60", valinnat)
-        self.assertIn("62", valinnat)
+class TestMarkov(unittest.TestCase):
+    """ Testit Markov-luokalle """
 
-    def test_generoi_triella_pituus(self):
-        melodia = generoi_triella(self.trie, pituus=10, aste=self.aste)
-        print("[test_generoi_triella_pituus] Generoitu melodia:", melodia)
-        self.assertGreaterEqual(len(melodia), self.aste)
-        self.assertLessEqual(len(melodia), 10)
+    def test_sample_laskurista(self):
+        """ Testaa sample_laskurista funktio """
+        lasketut = Counter({"A": 5, "B": 3, "C": 2})
+        tulos = markov.sample_laskurista(lasketut)
+        self.assertIn(tulos, lasketut)
+    
+    def test_sample_laskurista_tyhjalla(self):
+        """ Testaa sample_laskurista tyhjällä laskurilla """
+        self.assertIsNone(markov.sample_laskurista(Counter())) 
+        self.assertIsNone(markov.sample_laskurista(Counter({"A": 0})))
 
-    def test_generoi_triella(self):
-        melodia = generoi_triella(self.trie, pituus=10, aste=self.aste)
-        print("[test_generoi_triella] Generoitu melodia:", melodia)
-        for nuotti in melodia:
-            self.assertIn(nuotti, self.opetusdata)
+    def test_sample_kesto(self):
+        """ Testaa sample_kesto funktio """
+        for _ in range(10):
+            k = markov.sample_kesto()
+            self.assertIn(k, [0.25, 0.5, 1.0])
+
+    def test_generoi_triella_perus(self):
+        """ Testaa generoi_triella funktio perus tapauksessa """
+        trie = MockTrie(aste=2)
+        aloitus = ["A", "B"]
+        pituus = 5
+        melodia = markov.generoi_triella(trie, aloitus, pituus)
+
+        self.assertEqual(len(melodia), pituus)
+
+        for nuotti, kesto in melodia:
+            self.assertIsInstance(nuotti, str)
+            self.assertIsInstance(kesto, float)
+
+    def test_generoi_triella_tuntematon_aloitus(self):
+        """ Testaa generoi_triella tuntemattomalla aloituksella """
+        trie = MockTrie(aste=2)
+        aloitus = ["X", "Y"]
+        melodia = markov.generoi_triella(trie, aloitus, 4)
+
+        self.assertEqual(len(melodia), 4)
+        for nuotti, kesto in melodia:
+            self.assertIsInstance(nuotti, str)
+            self.assertIsInstance(kesto, float)
 
 
 if __name__ == "__main__":

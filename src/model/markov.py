@@ -1,6 +1,6 @@
 import random
 from typing import List, Tuple
-from model.trie import Trie
+from src.model.trie import Trie
 
 
 KESTOT = [

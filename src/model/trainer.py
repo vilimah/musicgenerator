@@ -1,11 +1,11 @@
 from typing import List
 from collections import Counter
-from model.trie import Trie
-from model.markov import generoi_triella, sample_laskurista
+from src.model.trie import Trie
+from src.model.markov import generoi_triella, sample_laskurista
 
 class Trainer:
     """ Trie mallin opetus ja nuottisekvenssin generointi """
-    def __init__(self, aste=4):
+    def __init__(self, aste=10):
         self.aste = aste
         self.sekvenssit = []
         self.aloitukset: List[tuple] = []

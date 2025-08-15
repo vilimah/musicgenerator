@@ -29,6 +29,7 @@ class Trie:
 
 
     def _node_for(self, ikkuna: List[str], luo: bool = False) -> Optional[TrieSolmu]:
+        """ palauttaa solmun annetulle ikkunalle, luo tarvittaessa """
         solmu = self.juuri
         for symboli in ikkuna:
             if symboli not in solmu.lapset:
@@ -39,7 +40,7 @@ class Trie:
         return solmu
     
     def next_distribution(self, ikkuna: List[str]) -> Counter:
-        """ Paluttaa Counterin jossa nuotit ja niiden lukumäärät"""
+        """ palauttaa Counterin jossa nuotit ja niiden lukumäärät"""
         solmu = self._node_for(ikkuna, luo=False)
         if solmu is None:
             return Counter()
