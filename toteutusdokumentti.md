@@ -13,12 +13,18 @@ jopa poistaa kokonaan. Data-kansiosta löytyy opetusdata.
 ## Aika- ja tilavaativuudet
 
 ## Puutteet ja parannukset
-Koodissa on generator.py, joka oli hetkellisesti käytössä generoimassa melodioita, mutta nyt se on käytännössä turha ja puutteellinen. Joko siirrän toiminnan main.py:stä generator.py:lle tai sitten poistan sen kokonaan. Puuttuu vielä testauksia ja aika- ja tilavaativuuden tekeminen.
+Nyt rakennuspalikat alkavat olemaan kohdillaan, mutta vähän vielä epäilen koodissani olevan pieni ongelma. Se generoi kyllä satunnaisia melodioita, mutta tein sellaisen ratkaisun, että jos ei löydetä jollakin x asteella enää uutta nuottia ja generoiminen päättyy, niin se toistaa sitten tätä melodiaa. Ongelmana on, että tuntuu, että se tuottaa hyvin lyhyitä melodioita tällä hetkellä (pienilläkin asteilla), jotka sitten toistaa itseään. 
+
+Lisäksi en ole vielä löytänyt mitään järkevää keinoa nuottien pituuksien generoimiseen. Tällä hetkellä se arpoo kokonuotin, puolinuotin ja neljännesosa nuotin väliltä, että mikä niistä asetetaan. Tähän myös liittyy ongelma, että jos ohjelma tuottaa melodioita edellä mainitulla tavalla eli se alkaa toistamaan itseään, niin se toistaa melodiaa epäsatunnaisten baarien välillä. Esimerkiksi olisi siis järkevää, että melodia toistuu tasa-baarien välillä (esim. 4 baarin välein), mutta melodiani ovat luokkaa 2,5 baaria tai jotain vastaavaa.
 
 ## Kielimallien käyttö
-ChatGPT:tä käytetty alussa suunnitteluun, että pääseen alkuun. Kysyin, miten tulisi aloittaa se auttoi minut etsimään tietoa oikeista paikoista. Kysyin myös, mistä tulisi etsiä sopivaa opetusdataa projektiani varten. ChatGPT:tä käytetty myös virheiden etsimiseen koodistani.
+ChatGPT:tä käytetty alussa suunnitteluun, että pääseen alkuun. Kysyin, miten tulisi aloittaa se auttoi minut etsimään tietoa oikeista paikoista. Kysyin myös, mistä tulisi etsiä sopivaa opetusdataa projektiani varten. ChatGPT:tä käytetty myös virheiden etsimiseen koodistani. 
+Projekti otti vähän takapakkia viikolla 5, joten ChatGPT:ltä kysytty koottu ideointi vielä rakenteesta, sillä sen hahmottaminen oli tässä kohtaa hukassa. ChatGPT:llä myös generoitu käyttöliittymä projektia varten.
+
+Visual Studio Code:ssa käytetty funktioiden kommentoinnin apuna Copilot-tekoälytyökalua.
 
 ## Lähteet
 - Trie wikipedia-artikkeli: https://en.wikipedia.org/wiki/Trie?utm_source=chatgpt.com
 - Markov chain wikipedia-artikkeli: https://en.wikipedia.org/wiki/Markov_chain
 - Pygame midi -kirjasto: https://www.pygame.org/docs/ref/midi.html
+- https://docs.python.org/3/library/unittest.html
