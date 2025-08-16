@@ -12,6 +12,16 @@ jopa poistaa kokonaan. Data-kansiosta löytyy opetusdata.
 
 ## Aika- ja tilavaativuudet
 
+### Trie-rakenne
+Insertissä sekvenssi pituus on m ja aste n ja jokaisesta m-n ikkunasta lisätään solmu trieen. Ikkunnan lisäämiseen käytetty aika on O(n) askelta. Tällöin koko aikavaatimus on O((m-n)*n).
+
+Haku eli next_distribution käy läpi ikkunat ajassa O(n), jossa jokainen symboli (nuotti) käydään läpi.
+
+Kaikki ikunat funktiossa aikavaatimus on O(k^n), jossa k on eri symbolien (nuottien) määrä.
+
+### Markov-gen
+
+
 ## Puutteet ja parannukset
 Nyt rakennuspalikat alkavat olemaan kohdillaan, mutta vähän vielä epäilen koodissani olevan pieni ongelma. Se generoi kyllä satunnaisia melodioita, mutta tein sellaisen ratkaisun, että jos ei löydetä jollakin x asteella enää uutta nuottia ja generoiminen päättyy, niin se toistaa sitten tätä melodiaa. Ongelmana on, että tuntuu, että se tuottaa hyvin lyhyitä melodioita tällä hetkellä (pienilläkin asteilla), jotka sitten toistaa itseään. 
 
