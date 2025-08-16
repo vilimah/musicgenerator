@@ -29,7 +29,7 @@ Lisäksi en ole vielä löytänyt mitään järkevää keinoa nuottien pituuksie
 
 ## Kielimallien käyttö
 ChatGPT:tä käytetty alussa suunnitteluun, että pääseen alkuun. Kysyin, miten tulisi aloittaa se auttoi minut etsimään tietoa oikeista paikoista. Kysyin myös, mistä tulisi etsiä sopivaa opetusdataa projektiani varten. ChatGPT:tä käytetty myös virheiden etsimiseen koodistani. 
-Projekti otti vähän takapakkia viikolla 5, joten ChatGPT:ltä kysytty koottu ideointi vielä rakenteesta, sillä sen hahmottaminen oli tässä kohtaa hukassa. ChatGPT:llä myös generoitu käyttöliittymä projektia varten.
+Projekti otti vähän takapakkia viikolla 5, joten ChatGPT:ltä kysytty koottu-ideointi vielä rakenteesta, sillä sen hahmottaminen oli tässä kohtaa hukassa. ChatGPT:llä myös generoitu käyttöliittymä projektia varten.
 
 Visual Studio Code:ssa käytetty funktioiden kommentoinnin apuna Copilot-tekoälytyökalua.
 
