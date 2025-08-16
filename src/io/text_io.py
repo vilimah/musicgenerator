@@ -2,6 +2,7 @@ import os
 from typing import List
 
 def lue_tekstina(hakemisto: str) -> List[str]:
+    """ lue tekstitiedostot hakemistosta ja palauta lista riveistä """
     melodiat = []
     for juuri, _, tiedostot in os.walk(hakemisto):
         for t in tiedostot:
@@ -18,6 +19,7 @@ def lue_tekstina(hakemisto: str) -> List[str]:
     return melodiat
 
 def kirjoita_tekstina(path: str, sek: List[str]):
+    """ kirjoittaa sekvenssin tekstitiedostoon """
     with open(path, "w", encoding="utf-8") as fh:
         fh.write("".join(sek) + "\n")
 

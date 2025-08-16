@@ -42,11 +42,13 @@ PITCH_MIDIKSI = {
 }
 
 def pitch_kirjaimeksi(pitch_luokka: int) -> str:
+    """ Muuntaa MIDI-pitch-luokan kirjaimeksi """
     PITCH_KIRJAIMIKSI  = {0: "C", 1: "C#", 2: "D", 3: "D#", 4: "E", 5: "F",
                        6: "F#", 7: "G", 8: "G#", 9: "A", 10: "A#", 11: "B"}
     return PITCH_KIRJAIMIKSI.get(pitch_luokka % 12, "C")
 
 def exporttaa_midiksi(path: str, melodia: Iterable[Union[str, Tuple[str, float]]], tempo: int = 120, ticks_per_beat: int = None, channel: int = 0, program: int = 0) -> None:
+    """ Vie melodia MIDI-tiedostoon """
     if ticks_per_beat is None:
         ticks_per_beat = CFG.default_ticks_per_beat
     mid = MidiFile(ticks_per_beat=ticks_per_beat)
@@ -76,6 +78,8 @@ def exporttaa_midiksi(path: str, melodia: Iterable[Union[str, Tuple[str, float]]
 KIRJAIN_MIDIKSI = {"C": 60, "D": 62, "E": 64, "F": 65, "G": 67, "A": 69, "B": 71}
 
 def _nuotti_midiksi(nuotti: str, oletus_oktaavi: int = 4) -> int:
+    """ Muuntaa nuotin MIDI-arvoksi """
+    
     s = nuotti.strip()
     i = len(s) - 1
 
