@@ -32,23 +32,24 @@ def sample_kesto() -> float:
 def generoi_triella(trie: Trie, aloitus: List[str], pituus: int) -> List[Tuple[str, float]]:
     """ Generoi asteiden mukaan ja palauttaa listan tupleja"""
     n = trie.aste
-    nuotit = list(aloitus[:n])
-    tulos: List[Tuple[str, float]] = [(nuotti, sample_kesto()) for nuotti in nuotit]
-
+    tulos: List[Tuple[str, float]] = []
+    # varmistetaan että aloitus on tarpeeksi pitkä
     while len(tulos) < pituus:
-        ikkuna = [nuotti for nuotti, _ in tulos[-n:]]
-        etaisyys = trie.next_distribution(ikkuna)
-        if not etaisyys:
-            break
-        seuraava = sample_laskurista(etaisyys)
-        if seuraava is None:
-            break
-        tulos.append((seuraava, sample_kesto()))
+        nuotit = list(aloitus[:n])
+        fragmentti: List[Tuple[str, float]] = [(nuotti, sample_kesto()) for nuotti in nuotit]
+        # alustetaan fragmentti ensimmäisillä nuoteilla
+        while len(fragmentti) + len (tulos) < pituus:
+            ikkuna = [nuotti for nuotti, _ in fragmentti[-n:]]
+            etaisyys = trie.next_distribution(ikkuna)
+            if not etaisyys:
+                break
+            seuraava = sample_laskurista(etaisyys)
+            if seuraava is None:
+                break
+            fragmentti.append((seuraava, sample_kesto()))
+        
+        # varmistetaan että fragmentti on oikean pituinen
+        tarvittava = pituus - len(tulos)
+        tulos.extend(fragmentti[:tarvittava])
 
-    # tämä tekee pyydetyn melodian pituuden
-    # toistaa olemassa olevaa listaa kunnes oikean pituinen
-    if len(tulos) < pituus and tulos:
-        reps = (pituus + len(tulos) - 1) // len(tulos)
-        tulos = (tulos * reps)[:pituus]
-
-    return tulos[:pituus]
+    return tulos

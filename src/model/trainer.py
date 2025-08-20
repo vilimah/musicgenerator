@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 from collections import Counter
 from src.model.trie import Trie
 from src.model.markov import generoi_triella, sample_laskurista
@@ -36,7 +36,7 @@ class Trainer:
         valinta = sample_laskurista(self.aloitukset_laskuri)
         return list(valinta)
     
-    def generoi(self, trie: Trie, pituus: int, aloitus: List[str]) -> List[str]:
+    def generoi(self, trie: Trie, pituus: int, aloitus: List[str]) -> List[Tuple[str, float]]:
         """ generoi sekvenssin triellä"""
         if not aloitus or len(aloitus) < self.aste:
             aloitus = self.painotettu_aloitus()
