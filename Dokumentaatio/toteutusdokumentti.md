@@ -10,7 +10,9 @@ Utilities sisältää löytyy midi-tiedostojen läpikäyvä funktio. Ja sitten o
 sen ennen main.py:tä, mutta sitä voi käyttää paikalliseen generointiin tai toisaalta voisin integroida sen toiminnan main.py käytettäväksi, tai
 jopa poistaa kokonaan. Data-kansiosta löytyy opetusdata.
 
-## Aika- ja tilavaativuudet
+## Aikavaativuudet
+
+
 
 ### Trie-rakenne
 Insertissä sekvenssi pituus on m ja aste n ja jokaisesta m-n ikkunasta lisätään solmu trieen. Ikkunnan lisäämiseen käytetty aika on O(n) askelta. Tällöin koko aikavaatimus on O((m-n)*n).
@@ -20,7 +22,11 @@ Haku eli next_distribution käy läpi ikkunat ajassa O(n), jossa jokainen symbol
 Kaikki ikunat funktiossa aikavaatimus on O(k^n), jossa k on eri symbolien (nuottien) määrä.
 
 ### Markov-gen
+Sample laskurista funktio käy läpi Counterin avaimet ja tällöin aikavaatimus on O(n).
 
+Nuotin keston arvonta (samplen kesto) käyttää random kirjastosta choices arvontaa ja tämän aikavaatimuus riippuu painojen määrästä eli se on O(1) tässä tapauksessa.
+
+Triellä generoinnissa generoidaan m määrä nuotteja, jossa jokaisessa muodostetaan ikuna n. Sen jälkeen arvotaan seuraava nuotti o. Tällöin aikavaatimukseksi muodostuu O(m*(n+o)) 
 
 ## Puutteet ja parannukset
 Nyt rakennuspalikat alkavat olemaan kohdillaan, mutta vähän vielä epäilen koodissani olevan pieni ongelma. Se generoi kyllä satunnaisia melodioita, mutta tein sellaisen ratkaisun, että jos ei löydetä jollakin x asteella enää uutta nuottia ja generoiminen päättyy, niin se toistaa sitten tätä melodiaa. Ongelmana on, että tuntuu, että se tuottaa hyvin lyhyitä melodioita tällä hetkellä (pienilläkin asteilla), jotka sitten toistaa itseään. 
