@@ -1,7 +1,6 @@
 # Testausdokumentti
 
-Tällä hetkellä minulta löytyy testit Trie-tietorakenteen ja Markovin-ketjujen generoinnin testaamiseen. Niihin tulisi vielä lisätä/muokata koodia,
-sillä nyt sieltä puuttuu vielä ajallinen testaus eli generoiko algoritmi riittävän pitusia melodioita ajallisesti. 
+Projektista löytyy testit trielle sekä markoville.
 
 ## Testauksen raportti 26.7
 
