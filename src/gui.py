@@ -10,6 +10,16 @@ from src.model.trainer import Trainer
 
 CFG = AppConfig()
 
+def seuraava_tiedosto(hakemisto: str, pohja: str) -> tuple[str, str]:
+    """ Luo seuraavan tiedoston nimen hakemistoon """
+    i = 1
+    while True:
+        txt_path = os.path.join(hakemisto, f"{pohja}_{i}.txt")
+        mid_path = os.path.join(hakemisto, f"{pohja}_{i}.mid")
+        if not os.path.exists(txt_path) and not os.path.exists(mid_path):
+            return txt_path, mid_path
+        i += 1
+
 def run_app():
     root = tk.Tk()
     root.title("MelGen – Trie/Markov")
@@ -111,11 +121,10 @@ def run_app():
         # Tallennus
         save_dir = filedialog.askdirectory(title="Valitse kansio tallennukselle (txt+mid)")
         if save_dir:
-            txt_path = os.path.join(save_dir, "generated_melody.txt")
+            txt_path, mid_path = seuraava_tiedosto(save_dir, "melodia")
             kirjoita_tekstina(txt_path, notes_only)
 
             try:
-                mid_path = os.path.join(save_dir, "generated_melody.mid")
                 exporttaa_midiksi(mid_path, generated, tempo=tempo)
             except Exception as e:
                 messagebox.showwarning("MIDI-vienti epäonnistui", f"Syynä: {e}")
