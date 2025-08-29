@@ -15,5 +15,6 @@ pip install -r requirements.txt
 suorita app.py
 
 5. valitse aste, tempo ja opetusdata
+(opetusdata löytyy /musicgenerator/src/data/OPETUSDATA/...)
 
 6. tallenna exportattu midi- ja tekstitiedosto
