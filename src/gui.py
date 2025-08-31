@@ -126,7 +126,7 @@ def run_app():
 
             try:
                 exporttaa_midiksi(mid_path, generated, tempo=tempo)
-            except Exception as e:
+            except Exception as e: 
                 messagebox.showwarning("MIDI-vienti epäonnistui", f"Syynä: {e}")
 
             messagebox.showinfo("Valmis", f"Tallennettu:\n- {txt_path}\n- {mid_path}")

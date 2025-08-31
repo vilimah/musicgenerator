@@ -5,10 +5,11 @@ sekä olennaiset lähteet.
 
 ## Ohjelman yleisrakenne
 
-Ohjelman rakenne toimii siten, että model-kansion sisältä löytyy toimivuus eli Markovin-ketjujen generointi (markov.py) , Trie-tietorakenne (trie.py) ja itse generaattori (generaattori.py). 
-Utilities sisältää löytyy midi-tiedostojen läpikäyvä funktio. Ja sitten on main.py, jolla pystyy generoimaan melodioita. Tällä hetkellä generator.py tuntuu vielä vähän hyödyttömältä, sillä loin
-sen ennen main.py:tä, mutta sitä voi käyttää paikalliseen generointiin tai toisaalta voisin integroida sen toiminnan main.py käytettäväksi, tai
-jopa poistaa kokonaan. Data-kansiosta löytyy opetusdata.
+Ohjelman rakenne toimii siten, että model-kansion sisältä löytyy toimivuus eli Markovin-ketjujen generointi (markov.py) , Trie-tietorakenne (trie.py) ja trainer.py
+Utilities-kansio sisältää notes.py, jossa on C-majorin tarkistus.
+Io-kansio sisältää midi- ja tekstitiedostojen käsittelyn.
+gui.py sisältää ohjelman käyttöliittymän ja sinne ohjataan näistä edellisistä tiedostoista toimminta.
+Lopuksi ohjelma ajetaan app.py tiedostossa.
 
 ## Aikavaativuudet
 
@@ -29,9 +30,9 @@ Nuotin keston arvonta (samplen kesto) käyttää random kirjastosta choices arvo
 Triellä generoinnissa generoidaan m määrä nuotteja, jossa jokaisessa muodostetaan ikuna n. Sen jälkeen arvotaan seuraava nuotti o. Tällöin aikavaatimukseksi muodostuu O(m*(n+o)) 
 
 ## Puutteet ja parannukset
-Nyt rakennuspalikat alkavat olemaan kohdillaan, mutta vähän vielä epäilen koodissani olevan pieni ongelma. Se generoi kyllä satunnaisia melodioita, mutta tein sellaisen ratkaisun, että jos ei löydetä jollakin x asteella enää uutta nuottia ja generoiminen päättyy, niin se toistaa sitten tätä melodiaa. Ongelmana on, että tuntuu, että se tuottaa hyvin lyhyitä melodioita tällä hetkellä (pienilläkin asteilla), jotka sitten toistaa itseään. 
-
-Lisäksi en ole vielä löytänyt mitään järkevää keinoa nuottien pituuksien generoimiseen. Tällä hetkellä se arpoo kokonuotin, puolinuotin ja neljännesosa nuotin väliltä, että mikä niistä asetetaan. Tähän myös liittyy ongelma, että jos ohjelma tuottaa melodioita edellä mainitulla tavalla eli se alkaa toistamaan itseään, niin se toistaa melodiaa epäsatunnaisten baarien välillä. Esimerkiksi olisi siis järkevää, että melodia toistuu tasa-baarien välillä (esim. 4 baarin välein), mutta melodiani ovat luokkaa 2,5 baaria tai jotain vastaavaa.
+Melodian nuottien pituuksien generointiin voisi olla järkevämpi toteutus.
+Opetusdatassa on vaihtoehtoja, mutta niissä ei ole mitään genre jakoa.
+Ohjelmaan voisi lisätä sävellajin valitsimen. Tällä hetkellä se generoi melodian vain C-duurissa/A-mollissa.
 
 ## Kielimallien käyttö
 ChatGPT:tä käytetty alussa suunnitteluun, että pääseen alkuun. Kysyin, miten tulisi aloittaa se auttoi minut etsimään tietoa oikeista paikoista. Kysyin myös, mistä tulisi etsiä sopivaa opetusdataa projektiani varten. ChatGPT:tä käytetty myös virheiden etsimiseen koodistani. 
@@ -44,3 +45,4 @@ Visual Studio Code:ssa käytetty funktioiden kommentoinnin apuna Copilot-tekoäl
 - Markov chain wikipedia-artikkeli: https://en.wikipedia.org/wiki/Markov_chain
 - Pygame midi -kirjasto: https://www.pygame.org/docs/ref/midi.html
 - https://docs.python.org/3/library/unittest.html
+- Mido -kirjasto https://mido.readthedocs.io/en/stable/

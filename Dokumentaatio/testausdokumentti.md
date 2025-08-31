@@ -1,24 +1,27 @@
 # Testausdokumentti
 
-Projektista löytyy testit trielle sekä markoville.
+Projektista löytyy testit trielle, markoville ja trainerille.
 
-## Testauksen raportti 26.7
+## Testauksen raportti
 
-Koodin arviointi näyttää tällä hetkellä vielä 6.37/10. 
+### Markovin testaus
+* Trielle asetettu kovat arvot dataksi: ("A", "B"): Counter({"C": 5, "D": 3}), ("B", "C"): Counter({"A": 2, "D": 4}). 
 
-Testien perusteella Markovin-ketjujen generoinnin testaus on melkein täydellisesti testattu (96% tällä hetkellä), mutta Trie-tietorakenteen testit 
-ovat vielä vajaatja kaipaa lisää testejä (tällä hetkellä 31%).
-Olen testannut Markovin-ketjuja siten, että se yrittää kovakoodatun opetusdatan perusteella generoida valmiiksi määritetyn pitusta "nuotti sarjaa".
-Tämä on vielä vajaa testi siinä mielessä, että testi yrittää tehdä vain tietyn monta nuottia, joka ei useimmiten onnistu säännöistä ja satunnaisuudesta johtuen. 
 
-Trie-tietorakenteeseen tulee vielä rakentaa testit, joka testaa melodian generoimisen ajallisen pituuden. Tällä hetkellä se testaa vain, että se tallentaa
-melodiat oikein, tunnistaa melodian ja se ei pidä osittaista melodiaa lopullisena.
+## Kattavuusraportti
 
-| NAME                        | Stmts          | Miss           | Cover             | Missing                       |
-|-----------------------------|----------------|----------------|-------------------|-------------------------------|
-| src/model/__init__.py       | 0              | 0              | 100%              | –                             |
-| src/model/markov.py         | 23             | 1              | 96%               | 32                            |
-| src/model/trie.py           | 16             | 11             | 31%               | 5–7, 13, 18–24                |
-| src/tests/markov_test.py    | 20             | 1              | 95%               | 30                            |
-| src/tests/trie_test.py      | 26             | 20             | 23%               | 13–36, 39                     |
-| TOTAL                       | 85             | 33             | 61%               |                               |
+Name                        Stmts   Miss  Cover   Missing
+---------------------------------------------------------
+src/__init__.py                 0      0   100%
+src/io/__init__.py              0      0   100%
+src/model/__init__.py           0      0   100%
+src/model/markov.py            36      2    94%   26, 50
+src/model/trainer.py           35      2    94%   35, 42
+src/model/trie.py              45      0   100%
+src/utilities/__init__.py       0      0   100%
+tests/__init__.py               0      0   100%
+tests/test_markov.py           40      1    98%   64
+tests/test_trainer.py          50      1    98%   77
+tests/test_trie.py             44      1    98%   61
+---------------------------------------------------------
+TOTAL                         250      7    97%
