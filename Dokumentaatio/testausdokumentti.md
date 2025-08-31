@@ -5,7 +5,16 @@ Projektista löytyy testit trielle, markoville ja trainerille.
 ## Testauksen raportti
 
 ### Markovin testaus
-* Trielle asetettu kovat arvot dataksi: ("A", "B"): Counter({"C": 5, "D": 3}), ("B", "C"): Counter({"A": 2, "D": 4}). 
+Trielle asetettu kovat arvot dataksi: ("A", "B"): Counter({"C": 5, "D": 3}), ("B", "C"): Counter({"A": 2, "D": 4}). 
+#### Arvoilla testattu funktioita:
+* sample_laskurista, jossa arvotaan seuraava elementti Counterista
+* sample_kesto, joka palauttaa satunnaisen keston nuotille (arvoina: neljäsosa-, puoli- ja kokonuotti)
+* generoi_triella, jossa annettu aloitus ["A", "B"] ja aste = 2
+* generoi_triella, mutta aloitus on tuntematon, kuten "X" ja "Y"
+
+### Trien testaus
+
+
 
 
 ## Kattavuusraportti
