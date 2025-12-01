@@ -10,7 +10,6 @@ KESTOT = [
 ]
 
 KESTOJEN_PAINOT = [0.6, 0.3, 0.1]
- 
 
 def sample_laskurista(lasketut):
     """ Arpoo seuraavan elementin Counterista"""
@@ -18,10 +17,10 @@ def sample_laskurista(lasketut):
     if summa <= 0:
         return None
     r = random.uniform(0, summa)
-    acc = 0.0  
-    for k, v in lasketut.items(): 
-        acc += v 
-        if r <= acc:    
+    acc = 0.0
+    for k, v in lasketut.items():
+        acc += v
+        if r <= acc:
             return k
     return None
 
